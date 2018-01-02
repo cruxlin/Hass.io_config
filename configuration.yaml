@@ -1,0 +1,122 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude
+  longitude: !secret longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: !secret elevation
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  time_zone: Asia/Taipei
+  # customize icon
+  customize: !include conf/customize.yaml
+  customize_domain: !include conf/customize_domain.yaml
+  customize_glob: !include conf/customize_glob.yaml
+
+# Show links to resources in log and frontend
+# introduction:
+
+# Enables the frontend, replaced by the include file
+# frontend:
+
+http:
+  # Uncomment this to add a password (recommended!)
+  api_password: !secret http_password
+  # Uncomment this if you are using SSL or running in Docker etc
+  base_url: regds.myds.me:8123
+  ssl_certificate: ssl/fullchain.pem
+  ssl_key: ssl/privkey.pem
+
+# Checks for available updates
+updater:
+  include_used_components: true
+
+# Discover some devices automatically
+discovery:
+ ignore:
+   - harmony
+#    - philips_hue
+#    - plex_mediaserver
+
+
+#remote:
+#  - platform: harmony
+#    name: Harmony Hub
+#    host: !secret harmony_ip
+#    scan_interval: 3600
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time.
+# history:
+
+# View all events in a logbook
+logbook:
+  exclude:
+    entities:
+      - sensor.internet_time
+      - sensor.time
+      - sensor.broadlink_sensor_temperature
+      - sun.sun
+
+# Track the sun
+sun:
+
+# enable configuration panel
+config:
+
+#################################################################
+## Components
+#################################################################
+
+# Text to speech
+tts:
+  - platform: google
+
+# light
+light:
+  platform: hue
+  host: !secret hue_ip
+
+# IFTTT
+ifttt:
+  key: !secret ifttt_key
+
+# Google API.AI
+dialogflow:
+
+# Snips
+snips:
+
+#mqtt for snips
+mqtt:
+#  broker: core-mosquitto
+ broker: 192.168.11.92
+ port: 1883
+ client_id: reghassio
+ keepalive: 1800
+ username: root
+
+#################################################################
+## Includes
+#################################################################
+frontend: !include conf/frontend.yaml
+group: !include conf/group.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+#script: !include_dir_merge_named conf/scripts
+#scene: !include conf/scenes.yaml
+sensor: !include conf/sensors.yaml
+switch: !include conf/switches.yaml
+media_player: !include conf/media_player.yaml
+shell_command: !include conf/shellcmd.yaml
+logger: !include conf/logger.yaml
+recorder: !include conf/recorder.yaml
+input_boolean: !include conf/input_boolean.yaml
+input_number: !include conf/input_number.yaml
+input_select: !include conf/input_select.yaml
+input_text: !include conf/input_text.yaml
+intent_script: !include_dir_named conf/intent_scripts
+notify: !include conf/notify.yaml

@@ -1,0 +1,106 @@
+###############
+# randomly choose another song to play on Google Home
+# if state of media_player changed from playing to idle and loop_play is enabled
+- id: conti_playing_song
+  alias: 'continue playing another song'
+  trigger:
+    platform: state
+    entity_id: media_player.living_room_home
+    from: 'playing'
+    to: 'idle'
+  condition:
+    condition: state
+    entity_id: input_boolean.loop_play
+    state: 'on'
+  action:
+    service: script.turn_on
+    entity_id: script.play_a_song
+
+- id: change_loop_play_state 
+  alias: 'change loop_play state if Google Home is stopped playing or off'
+  trigger:
+    - platform: state
+      entity_id: media_player.living_room_home
+      from: 'idle'
+      to: 'stop'
+    - platform: state
+      entity_id: media_player.living_room_home
+      from: 'idle'
+      to: 'off'
+  condition:
+    condition: state
+    entity_id: input_boolean.loop_play
+    state: 'on'
+  action:
+    service: input_boolean.turn_off
+    entity_id: input_boolean.loop_play
+
+###############
+# scheduled reminder at 8pm everyday by Google Home
+- id: remind_drink_water_and_piss
+  alias: 'remind drink water and piss'
+  trigger:
+    - platform: time
+      hours: '10'
+      minutes: '00'
+      seconds: '00'
+    - platform: time
+      hours: '14'
+      minutes: '00'
+      seconds: '00'
+    - platform: time
+      hours: '16'
+      minutes: '00'
+      seconds: '00'
+    - platform: time
+      hours: '18'
+      minutes: '00'
+      seconds: '00'
+    - platform: time
+      hours: '20'
+      minutes: '00'
+      seconds: '00'
+  condition:
+    condition: or
+    conditions: 
+      # remind at 20:00 every weekday
+      - condition: time
+        after: '19:30:00'
+        before: '20:30:00'
+        weekday:
+         - mon
+         - tue
+         - wed
+         - thu
+         - fri
+      # remind at 10~20 in weekend
+      - condition: time
+        after: '09:30:00'
+        before: '20:30:00'
+        weekday:
+         - sat
+         - sun
+  action:
+    service: script.turn_on
+    entity_id: script.tts_msg_drink
+
+# Notify Caller ID
+- id: notify_callerid_webui
+  alias: 'Notify CallerID webui'
+  trigger: 
+    platform: state
+    entity_id: sensor.regmodem_callerid
+    to: "callerid"
+  action:
+    - service: shell_command.convert_caller_name
+    - service: script.turn_on
+      entity_id: script.tts_callerid
+    - service: persistent_notification.create
+      data:
+        title: "Call from"
+        message: '{{ states.sensor.regmodem_callerid.attributes.cid_time.strftime("%b-%d-%Y %H:%M:%S") }} {{ states.sensor.regmodem_callerid.attributes.cid_number }} '
+    - service: notify.call_log
+      data:
+        message: '{{ states.sensor.regmodem_callerid.attributes.cid_time.strftime("%b-%d-%Y %H:%M:%S") }} {{ states.sensor.regmodem_callerid.attributes.cid_number }} '
+
+

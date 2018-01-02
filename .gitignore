@@ -1,0 +1,6 @@
+*
+!*.yaml
+!/config/conf
+!/config/custom_components
+!.gitignore
+secrets.yaml

@@ -1,0 +1,429 @@
+all_lights_on:
+  alias: Turn on all lights
+  sequence:
+  - alias: Main Lamp on
+    service: switch.turn_on
+    data:
+      entity_id: switch.main_lamp_switch
+  - delay: 1
+  - alias: Main LED on
+    service: switch.turn_on
+    data:
+      entity_id: switch.main_led_switch
+  - delay: 1
+  - alias: Table Lamp on
+    service: switch.turn_on
+    data:
+      entity_id: switch.table_lamp_switch
+  - delay: 1
+  - alias: Gate Lamp on
+    service: switch.turn_on
+    data:
+      entity_id: switch.gate_lamp_switch
+all_lights_off:
+  alias: Turn off all lights
+  sequence:
+  - alias: Main Lamp off
+    service: switch.turn_off
+    data:
+      entity_id: switch.main_led_switch
+  - delay: 1
+  - alias: Table Lamp off
+    service: switch.turn_off
+    data:
+      entity_id: switch.table_lamp_switch
+  - delay: 1
+  - alias: Gate Lamp off
+    service: switch.turn_off
+    data:
+      entity_id: switch.gate_lamp_switch
+night_mode:
+  alias: switch to night mode
+  sequence:
+#  - alias: Gate Lamp on
+#    service: switch.turn_on
+#    data:
+#      entity_id: switch.gate_lamp_switch
+#  - delay: 1
+#  - alias: Main Lamp off
+#    service: switch.turn_off
+#    data:
+#      entity_id: switch.main_led_switch
+  - alias: Main Lamp on
+    service: switch.turn_on
+    data:
+      entity_id: switch.lamp_main_led_night
+  - delay: 1
+  - alias: Gate Lamp off
+    service: switch.turn_off
+    data:
+      entity_id: switch.gate_lamp_switch
+  - delay: 1
+  - alias: Table Lamp off
+    service: switch.turn_off
+    data:
+      entity_id: switch.table_lamp_switch
+main_light_on:
+  alias: Turn on main lights
+  sequence:
+  - alias: Main Lamp on
+    service: switch.turn_on
+    data:
+      entity_id: switch.main_lamp_switch
+  - delay: 1
+  - alias: Main LED on
+    service: switch.turn_on
+    data:
+      entity_id: switch.main_led_switch
+table_lamp_toggle:
+  alias: toggle table lamps
+  sequence:
+  - alias: Table Lamp off
+    service: switch.turn_off
+    data:
+      entity_id: switch.table_lamp_switch
+  - delay:
+      seconds:1
+      milliseconds:500
+  - alias: Table Lamp on
+    service: switch.turn_on
+    data:
+      entity_id: switch.table_lamp_switch
+table_lamp_full_on:
+  alias: turn on all table lamps
+  sequence:
+  - alias: Table Lamp on
+    data:
+      entity_id: switch.table_lamp_switch
+    service: switch.turn_on
+  - delay: 1
+  - alias: Table Lamp off
+    data:
+      entity_id: switch.table_lamp_switch
+    service: switch.turn_off
+  - delay: 1
+  - alias: Table Lamp on
+    data:
+      entity_id: switch.table_lamp_switch
+    service: switch.turn_on
+  - delay: 1
+  - alias: Table Lamp off
+    data:
+      entity_id: switch.table_lamp_switch
+    service: switch.turn_off
+  - delay: 1
+  - alias: Table Lamp on
+    data:
+      entity_id: switch.table_lamp_switch
+    service: switch.turn_on
+catv_on:
+  alias: Turn on CATV(TBC)
+  sequence:
+  - alias: Turn on TV
+    service: switch.turn_on
+    data:
+      entity_id: switch.sony_tv_power
+  - delay: 1
+  - alias: toggle TBC power
+    service: switch.turn_on
+    data:
+      entity_id: switch.cable_tv_power
+  - delay: 00:00:03
+  - alias: Switch TV input to HDMI1
+    service: switch.turn_on
+    data:
+      entity_id: switch.sony_tv_input_hdmi1
+catv_off:
+  alias: Turn off CATV(TBC)
+  sequence:
+  - alias: Turn off TV
+    service: switch.turn_off
+    data:
+      entity_id: switch.sony_tv_power
+  - delay: 1
+  - alias: turn off TBC power
+    service: switch.turn_off
+    data:
+      entity_id: switch.cable_tv_power
+mod_on:
+  alias: Turn on MOD
+  sequence:
+  - alias: Turn on TV
+    service: switch.turn_on
+    data:
+      entity_id: switch.sony_tv_power
+  - delay: 1
+  - alias: toggle mod power
+    service: switch.turn_on
+    data:
+      entity_id: switch.mod_power
+  - delay: 00:00:03
+  - alias: Switch TV input to HDMI2
+    service: switch.turn_on
+    data:
+      entity_id: switch.sony_tv_input_hdmi2
+mod_off:
+  alias: Turn off MOD
+  sequence:
+  - alias: Turn off TV
+    service: switch.turn_off
+    data:
+      entity_id: switch.sony_tv_power
+  - delay: 1
+  - alias: turn off mod power
+    service: switch.turn_off
+    data:
+      entity_id: switch.mod_power
+cc_on:
+  alias: Turn on Chromecast
+  sequence:
+  - alias: Turn on Chromecast power (HS100)
+    service: switch.turn_on
+    data:
+      entity_id: switch.chromecast_power
+  - delay: 1
+  - alias: Turn on TV
+    service: switch.turn_on
+    data:
+      entity_id: switch.sony_tv_power
+  - delay: 00:00:02
+  - alias: Switch Amp to DVDin
+    service: switch.turn_on
+    data:
+      entity_id: switch.sony_av_system_dvd_input
+cc_off:
+  alias: Turn off Chromecast
+  sequence:
+  - alias: Turn off TV
+    service: switch.turn_off
+    data:
+      entity_id: switch.sony_tv_power
+  - delay: 1
+  - alias: Turn off Chromecast power (HS100)
+    service: switch.turn_off
+    data:
+      entity_id: switch.chromecast_power
+  - delay: 1
+  - alias: Switch Amp to DVDin
+    service: switch.turn_on
+    data:
+      entity_id: switch.sony_av_system_dvd_input
+  - delay: 2
+  - alias: turn off Amp power
+    service: switch.turn_off
+    data:
+      entity_id: switch.sony_av_system_power
+bd_on:
+  alias: Turn on BD
+  sequence:
+  - alias: Turn on TV
+    service: switch.turn_on
+    data:
+      entity_id: switch.sony_tv_power
+  - delay: 1
+  - alias: turn on BD power
+    service: switch.turn_on
+    data:
+      entity_id: switch.sony_bd_player_power
+  - delay: 1
+  - alias: Switch Amp to BDin
+    service: switch.turn_on
+    data:
+      entity_id: switch.sony_av_system_bd_input
+bd_off:
+  alias: Turn off BD
+  sequence:
+  - alias: Turn off TV
+    service: switch.turn_off
+    data:
+      entity_id: switch.sony_tv_power
+  - delay: 1
+  - alias: turn off BD power
+    service: switch.turn_off
+    data:
+      entity_id: switch.sony_bd_player_power
+  - delay: 1
+  - alias: turn off Amp power
+    service: switch.turn_off
+    data:
+      entity_id: switch.sony_av_system_power
+
+tts_msg_drink:
+  alias: Remind children to drink water and piss
+  sequence:
+  - service: media_player.turn_off
+    entity_id: media_player.living_room_home
+  - delay: 1
+  - service: media_player.turn_on
+    entity_id: media_player.living_room_home
+  - delay: 1
+  - service: media_player.volume_set
+    entity_id: media_player.living_room_home
+    data:
+      volume_level: 0.7
+  - delay: 1
+  - service: tts.google_say
+    entity_id: media_player.living_room_home
+    data_template:
+      language: zh-tw
+      message: >
+        {{ [  "躺棠鼠和演妍龍 兩個頑皮蛋 該去喝水尿尿了",
+              "小棠和小妍 有點久了 去喝口水和上廁所吧", 
+              "不要再混了 棠大寶和妍小寶 去上廁所和喝水"
+           ] | random }}
+  - delay: 10
+  - service: media_player.volume_set
+    entity_id: media_player.living_room_home
+    data:
+      volume_level: 0.3
+
+tts_callerid:
+  alias: Report caller's number
+  sequence:
+  - service: media_player.volume_set
+    entity_id: media_player.living_room_home
+    data:
+      volume_level: 0.7
+  - delay: 1
+  - service: tts.google_say
+    entity_id: media_player.living_room_home
+    data_template: 
+      language: zh-tw
+      message: >
+        {%- if states.input_text.caller_name.state == "unknown" -%}
+          '來電是{{ states.sensor.regmodem_callerid.attributes.cid_number }} '
+        {%- else -%}
+          '來電是{{ states.input_text.caller_name.state }} {{ states.sensor.regmodem_callerid.attributes.cid_number }} ' 
+        {%- endif -%}
+  - delay: 10
+  - service: media_player.volume_set
+    entity_id: media_player.living_room_home
+    data:
+      volume_level: 0.3
+
+play_music:
+  alias: Play my music on Google Home
+  sequence:
+  - alias: cast a random song to google home
+    service: script.turn_on
+    data:
+      entity_id: script.play_a_song
+  - alias: enable loop play
+    service: input_boolean.turn_on
+    data:
+      entity_id: input_boolean.loop_play
+play_a_song:
+  alias: Play a song on Google Home
+  sequence:
+  - alias: cast random song to google home
+    service: media_player.play_media
+    data_template:
+      entity_id: media_player.living_room_home
+      media_content_id: http://192.168.11.2/~homeassistant/list/{{ (range(1,398) | random) }}.mp3
+      media_content_type: MUSIC
+stop_play:
+  alias: Stop playing my music on Google Home
+  sequence:
+  - alias: stop play google home
+    service: media_player.media_stop
+    data:
+      entity_id: media_player.living_room_home
+  - alias: enable loop play
+    service: input_boolean.turn_off
+    data:
+      entity_id: input_boolean.loop_play
+
+turn_on_snips_feedback_sound:
+  alias: Turn on SNIPS feedback sound
+  sequence:
+  - service: mqtt.publish
+    data:
+      topic: "hermes/feedback/sound/toggleOn"
+      payload: '{"siteId":"default"}'
+  - delay: 1
+  - service: mqtt.publish
+    data:
+      topic: "hermes/dialogueManager/startSession"
+      payload: '{"siteId":"default","init": {"type":"notification","text":"turn on feedback sound"}}'
+
+turn_off_snips_feedback_sound:
+  alias: Turn off SNIPS feedback sound
+  sequence:
+  - service: mqtt.publish
+    data:
+      topic: "hermes/feedback/sound/toggleOff"
+      payload: '{"siteId":"default"}'
+  - delay: 1
+  - service: mqtt.publish
+    data:
+      topic: "hermes/dialogueManager/startSession"
+      payload: '{"siteId":"default","init": {"type":"notification","text":"turn on feedback sound"}}'
+
+snips_sound_test:
+  alias: test snips tts
+  sequence:
+  - service: mqtt.publish
+    data:
+      topic: "hermes/dialogueManager/startSession"
+      payload_template: '{"siteId":"default","init": {"type":"notification","text":"{{ ["Okay","Sure","Got it","No problem" ] | random }} Switch lamps to on"} }'
+
+snips_ch_error_response:
+  alias: respond change channel error
+  sequence:
+  - service: tts.google_say
+    entity_id: media_player.living_room_home
+    data: 
+      language: zh-tw
+      message: "無法切換頻道"
+#  - service: mqtt.publish
+#    data:
+#      topic: "hermes/dialogueManager/startSession"
+#      payload: '{"siteId":"default","init": {"type":"notification","text":" Fail to change channel because of wrong channel name or number "} }'
+
+snips_action:
+  alias: snips action for captured text
+  sequence:
+  - service: mqtt.publish
+    data:
+      topic: "hermes/dialogueManager/startSession"
+      payload: '{"siteId":"default","init": {"type":"action","canBeEnqueued":true} }'
+  - delay: 2
+  - service: mqtt.publish
+    data_template:
+      topic: "hermes/asr/textCaptured"
+#      payload: '{"text": "turn on door light" ,"likelihood":0.003,"seconds":5.8,"siteId":"default"}'
+      payload_template: '{"text": "{{ InputText | lower }}" ,"likelihood":0.003,"seconds":5.8,"siteId":"default"}'
+
+input_channel:
+  alias: input channel_no of channel_device (CATV or MOD)
+  sequence: 
+  - service: switch.turn_on
+    data_template:
+      entity_id: switch.{{ states.input_select.channel_device.state }}_key_{{ states.input_number.channel_no.state|int // 100 }}
+ # - delay: "00:00:{{ states.sensor.channel_delay.state }}"
+  - delay:
+      milliseconds: 1000
+  - service: switch.turn_on
+    data_template:
+      entity_id: switch.{{ states.input_select.channel_device.state }}_key_{{ states.input_number.channel_no.state|int % 100 // 10 }}
+ # - delay: "00:00:{{ states.sensor.channel_delay.state }}"
+  - delay:
+      milliseconds: 1000
+  - service: switch.turn_on
+    data_template:
+      entity_id: switch.{{ states.input_select.channel_device.state }}_key_{{ states.input_number.channel_no.state|int % 10 }}
+  - delay:
+      milliseconds: 100
+
+input_channel_name:
+  alias: input channel_name of channel_device (CATV or MOD)
+  sequence:
+  - alias: execute shell command 
+    service: shell_command.convert_name_to_no
+  - delay: 
+      seconds: 2
+      milliseconds: 0
+  - alias: execute switch channel script 
+    service: script.turn_on
+    data:
+      entity_id: script.input_channel
