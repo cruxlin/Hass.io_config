@@ -1,7 +1,12 @@
 *
 !*.yaml
+!conf/
 !conf/**/*.yaml
 !conf/**/*.sh
+!conf/intent_scripts/
+!conf/shell_command/
+!custom_components/
 !custom_components/**/*.py
+!custom_components/sensor/
 !.gitignore
 secrets.yaml

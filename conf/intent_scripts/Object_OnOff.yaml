@@ -1,0 +1,55 @@
+# Intent "Object_OnOff" for snips
+action:
+#  - service: mqtt.publish
+#    data_template:
+#      topic: "hermes/dialogueManager/startSession"
+#      payload_template: >
+#        {%- if ObjectAction == "toogle" and Object!= "table lamp" -%}
+#          {"siteId":"default","init":{"type":"notification","text":"toggling {{ Object }} power is not supported  "}}
+#        {%- elif ObjectAction == "toogle" and Object == "table lamp" -%}
+#          {"siteId":"default","init":{"type":"notification","text":" {{ ["Okay","Sure","Got it","No problem" ] | random }} toggle {{ Object }} "}}
+#        {%- else -%}
+#          {"siteId":"default","init":{"type":"notification","text":" {{ ["Okay","Sure","Got it","No problem" ] | random }} Switch {{ Object }} to {{ ObjectAction }} "}}
+#        {%- endif -%}
+#
+#  - service: tts.google_say
+#    entity_id: media_player.living_room_home
+#    data_template: 
+#      language: en-us
+#      message: >
+#        {%- if ObjectAction == "toogle" and Object!= "table lamp" -%}
+#          “toggling {{ Object }} power is not supported  "}}
+#        {%- elif ObjectAction == "toogle" and Object == "table lamp" -%}
+#          " {{ ["Okay","Sure","Got it","No problem" ] | random }} toggle {{ Object }} "
+#        {%- else -%}
+#          " {{ ["Okay","Sure","Got it","No problem" ] | random }} Switch {{ Object }} to {{ ObjectAction }} "
+#        {%- endif -%}
+#
+  - service_template: >
+      {%- if Object == "all lights" or Object == "mod" or Object == "cc" or Object == "catv" or Object == "bd" or Object == "snips_feedback_sound" -%}
+        script.turn_on
+      {%- elif ObjectAction == "on" and Object == "main led" -%}
+        script.turn_on
+      {%- elif ObjectAction == "toggle" and Object == "table lamp" -%}
+        script.turn_on
+      {%- elif ObjectAction == "on" -%}  
+        switch.turn_on
+      {%- elif ObjectAction == "off" -%}  
+        switch.turn_off
+      {%- else -%}
+        switch.turn_on
+      {%- endif -%}
+    data_template:
+      entity_id: >
+        {%- if (Object == "all lights" or Object == "mod" or Object == "cc" or Object == "catv" or Object == "bd") and (ObjectAction != "toogle") -%}
+          script.{{ Object | replace(' ', '_') }}_{{ ObjectAction }}
+        {%- elif Object == "snips_feedback_sound" -%}
+          script.turn_{{ ObjectAction }}_{{ Object }}
+        {%- elif ObjectAction == "on" and Object == "main led" -%}
+          script.main_light_on
+        {%- elif ObjectAction == "toggle" and Object == "table lamp" -%}
+          script.table_lamp_toogle
+        {%- else -%}
+          switch.{{ Object | replace(' ', '_') }}_switch
+        {%- endif -%}
+

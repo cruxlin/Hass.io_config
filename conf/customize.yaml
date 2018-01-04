@@ -1,0 +1,40 @@
+###################################
+##  Date / Time
+###################################
+sensor.date:
+  hidden: false
+
+sensor.time:
+  hidden: false
+
+sensor.internet_time:
+  hidden: true
+
+sensor.sunset_time:
+  icon: mdi:sun
+
+script.play_music:
+  icon: mdi:robot
+  assumed_state: false
+  initial_state: on
+script.play_a_song:
+  icon: mdi:robot
+  assumed_state: false
+  initial_state: on
+script.stop_play:
+  icon: mdi:robot
+  assumed_state: false
+  initial_state: on
+script.tts_msg_drink:
+  icon: mdi:robot
+  assumed_state: false
+  initial_state: on
+script.tts_callerid:
+  icon: mdi:robot
+  assumed_state: false
+  initial_state: on
+
+switch.avsys:
+  icon: mdi:checkbox-multiple-blank-circle
+  assumed_state: false
+  initial_state: off

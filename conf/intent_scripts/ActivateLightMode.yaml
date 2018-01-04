@@ -1,0 +1,45 @@
+# Intent "TurnLights" for api.ai
+async_action: True
+action:
+  - service: mqtt.publish
+    data_template:
+      topic: "hermes/dialogueManager/startSession"
+      payload_template: >
+        {"siteId":"default","init":{"type":"notification","text":" {{ ["Okay","Sure","Got it","No problem" ] | random }} Switch {{ Lamps }} to {{ LampAction }} "}}
+
+  - service_template: >
+      {%- if Lamps == "all lights" -%}
+        script.turn_on
+      {%- elif LampAction == "on" and Lamps == "main led" -%}
+        script.turn_on
+      {%- elif ( ( LampAction == "toggle" or LightingMode == "max" ) and Lamps == "table lamp") -%}
+        script.turn_on
+      {%- elif LampAction == "on" -%}  
+        switch.turn_on
+      {%- elif LampAction == "off" -%}  
+        switch.turn_off
+      {%- else -%}
+        switch.turn_on
+      {%- endif -%}
+    data_template:
+      entity_id: >
+        {%- if LampAction == "on" and Lamps == "all lights" -%}
+          script.all_lights_on
+        {%- elif LampAction == "off" and Lamps == "all lights" -%}
+          script.all_lights_off
+        {%- elif LightingMode == "nightmode" and Lamps == "all lights" -%}
+          script.night_mode
+        {%- elif LampAction == "on" and Lamps == "main led" -%}
+          script.main_light_on
+        {%- elif LightingMode == "max" and Lamps == "table lamp" -%}
+          script.table_lamp_full_on
+        {%- elif LampAction == "toggle" and Lamps == "table lamp" -%}
+          script.table_lamp_toogle
+        {%- elif LampAction == "on" and Lamps == "main led" -%}
+          script.main_light_on
+        {%- elif LampAction != "off" and Lamps == "main led" -%}
+          switch.main_led_{{ LightingMode | replace(' ', '_') }}
+        {%- else -%}
+          switch.{{ Lamps | replace(' ', '_') }}_switch
+        {%- endif -%}
+

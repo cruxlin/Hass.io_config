@@ -1,0 +1,2 @@
+convert_name_to_no: bash /config/conf/shell_command/convert_channel_name_to_no.sh {{ states.input_select.channel_device.state }} {{ states.input_select.channel_name.state }}
+convert_caller_name: bash /config/conf/shell_command/convert_to_caller_name.sh {{ states.sensor.regmodem_callerid.attributes.cid_number }}

@@ -1,0 +1,15 @@
+# Intent ReportStatus for Snips
+action:
+#  - service: persistent_notification.create
+#    data_template:
+#      title: "Report Status"
+#      message: "The {{ Location }} {{ Status }} is {{ states('sensor.cpu_temperature') }} or {{ states('sensor.broadlink_temperature') }}  degrees"
+  - service: mqtt.publish
+    data_template:
+      topic: "hermes/dialogueManager/startSession"
+      payload_template: >
+       {%- if Location=='cpu' -%}
+         {"siteId":"default","init": {"type":"notification","text":"The processor temperature is {{ states('sensor.cpu_temperature') }}  degrees"}}
+       {%- else -%}
+         {"siteId":"default","init": {"type":"notification","text":"The home temperature is {{ states('sensor.broadlink_temperature') }}  degrees"}}
+       {%- endif -%}

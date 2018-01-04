@@ -1,0 +1,107 @@
+##################################
+## WEATHER & Date
+##################################
+# - platform: openweathermap
+#  api_key: 48381839ec91a52ad323c78ab03bb937
+#  monitored_conditions:
+#    - weather
+#    - temperature
+#    - humidity
+#    - clouds
+
+- platform: time_date
+  display_options:
+    - 'time'
+    - 'date'
+
+- platform: broadlink
+  update_interval: 1800
+  host: !secret broadlink_ip
+  mac: !secret broadlink_mac2
+  monitored_conditions:
+    - temperature
+
+- platform: template
+  sensors:
+    broadlink_temperature:
+      value_template: '{{(states(''sensor.broadlink_sensor_temperature'') | float - 0 ) | round (0)}}'
+      friendly_name: 'Broadlink Temperature'
+      unit_of_measurement: '°C'
+#    channel_delay:
+#      friendly_name: 'Delay for channel no. input'
+#      value_template: >
+#        {%- if is_state('input_select.channel_device', 'cable_tv') -%}
+#          1
+#        {%- else -%}
+#          0
+#        {%- endif -%}
+
+##################################################################
+### caller id, use customized components (modified from modem_callerid and basicmodem module)
+###################################################################
+-  platform: regmodem_callerid
+
+##################################################################
+### Raspberry PI3 CPU temperature
+###################################################################
+-  platform: command_line
+   command: "cat /sys/class/thermal/thermal_zone0/temp"
+   name: CPU Temperature
+   unit_of_measurement: "°C"
+   value_template: '{{ value | multiply(0.001) | round(2) }}'
+   scan_interval: 3600
+
+##################################################################
+### mqtt sensor for snips info
+###################################################################
+- platform: mqtt  
+  state_topic: "hermes/asr/textCaptured"  
+  name: "Answer"    
+  value_template: '{{ value_json.text }}'
+
+- platform: mqtt  
+  state_topic: "hermes/nlu/intentParsed"  
+  name: "textinput"    
+  value_template: '{{ value_json.input }}'
+
+- platform: mqtt  
+  state_topic: "hermes/nlu/intentParsed"  
+  name: "intentname"    
+  value_template: '{{ value_json.intent.intentName }}'
+
+- platform: mqtt  
+  state_topic: "hermes/nlu/intentParsed"  
+  name: "probability"    
+  value_template: '{{ value_json.intent.probability }}'
+
+##################################################################
+### Current HASS Version
+###################################################################
+#- platform: command_line
+#  command: /volume1/homeassistant/bin/python3 -c "import requests; print(requests.get('https://pypi.python.org/pypi/homeassistant/json').json()['info']['version'])"
+#  name: Current HASS Version
+#  scan_interval: 3600
+
+- platform: version
+
+##################################################################
+### Installed HASS Version
+###################################################################
+#-  platform: command_line
+#   command: "head -5 /volume1/homeassistant/.HA_VERSION"
+#   name: Installed HASS Version
+#   scan_interval: 3600
+
+##################################################################
+### HASS Update Available
+###################################################################
+#- platform: template
+#  sensors:
+#    hass_update_available:
+#      friendly_name: 'HASS Update Available'
+#      value_template: >-
+#        {%- if states.sensor.current_hass_version.state != states.sensor.installed_hass_version.state -%}
+#           {{ states.sensor.current_hass_version.state }}
+#        {%- else -%}
+#           No
+#        {%- endif -%}

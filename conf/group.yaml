@@ -1,0 +1,197 @@
+# group
+default_view:
+  view: yes
+  entities:
+    - group.living_room
+    - group.catv_sw
+    - group.mod_sw
+    - group.bedroom
+    - input_boolean.loop_play
+    - input_text.caller_name
+#    - media_player.mpd
+    - media_player.living_room_home
+    - media_player.chrome_cast_tv
+
+status:
+  name: Status
+  icon: mdi:information-outline
+  view: yes
+  entities:
+    - sun.sun
+    - group.info_group
+
+info_group:
+  name: info
+  entities:
+    - sensor.date
+    - sensor.time
+    - sensor.broadlink_temperature
+    - sensor.cpu_temperature
+    - sensor.current_version
+
+snips_group:
+  name: Snips control panel
+  entities:
+    - sensor.answer
+    - sensor.textinput
+    - sensor.intentname
+    - sensor.probability
+    - script.input_channel
+    - input_number.channel_no
+    - input_select.channel_device
+    - script.input_channel_name
+    - input_select.channel_name
+    - script.turn_on_snips_feedback_sound
+    - script.turn_off_snips_feedback_sound
+    - script.snips_ch_error_response
+    - script.snips_action
+    - script.snips_sound_test
+
+living_room:
+  name: Living Room
+  icon: mdi:sofa
+  view: yes
+  entities:
+    - group.snips_group
+    - script.catv_on
+    - script.catv_off
+    - script.mod_on
+    - script.mod_off
+    - script.all_lights_on
+    - script.night_mode
+    - script.all_lights_off
+    - script.table_lamp_toggle
+    - script.table_lamp_full_on
+    - script.cc_on
+    - script.cc_off
+    - script.bd_on
+    - script.bd_off
+    - script.play_music
+    - script.play_a_song
+    - script.stop_play
+    - script.tts_msg_drink
+    - script.tts_callerid
+
+living_room_lightsw:
+  name: Living Room(light)
+  icon: mdi:ceiling-light
+  view: yes
+  entities:
+    - switch.gate_lamp_switch
+    - switch.main_lamp_switch
+    - switch.table_lamp_switch
+    - switch.main_led_switch
+    - switch.main_led_max
+    - switch.main_led_white
+    - switch.main_led_warm
+    - switch.main_led_morewhite
+    - switch.main_led_morewarm
+    - switch.main_led_nightmode
+    - switch.main_led_brighter
+    - switch.main_led_dimmer
+
+living_room_sw:
+  name: Living Room(SW)
+  icon: mdi:remote
+  view: yes
+  entities:
+    - switch.sony_tv_input_selection
+    - switch.sony_tv_input_hdmi1
+    - switch.sony_tv_input_hdmi2
+    - switch.sony_tv_input_dtv
+    - switch.sony_tv_mute
+    - switch.sony_tv_power
+    - switch.sony_bd_player_net_video
+    - switch.sony_bd_player_openclose
+    - switch.sony_bd_player_power
+    - switch.chromecast_power
+    - switch.sony_av_system_bd_input
+    - switch.sony_av_system_dvd_input
+    - switch.sony_av_system_power
+    - switch.sony_av_system_sat_input
+    - switch.sony_av_system_tuner_input
+    - switch.sony_av_system_tv_input
+
+
+catv_sw:
+  name: Cable TV
+  icon: mdi:television
+  view: yes
+  entities:
+    - switch.cable_tv_power
+    - switch.cable_tv_key_ok
+    - switch.cable_tv_key_1
+    - switch.cable_tv_key_2
+    - switch.cable_tv_key_3
+    - switch.cable_tv_key_4
+    - switch.cable_tv_key_5
+    - switch.cable_tv_key_6
+    - switch.cable_tv_key_7
+    - switch.cable_tv_key_8
+    - switch.cable_tv_key_9
+    - switch.cable_tv_key_0
+    - switch.cable_tv_key_return
+    - switch.cable_tv_key_exit
+    - switch.cable_tv_key_ch_p
+    - switch.cable_tv_key_ch_m
+    - switch.cable_tv_key_left
+    - switch.cable_tv_key_right
+    - switch.cable_tv_key_up
+    - switch.cable_tv_key_down
+    - switch.cable_tv_key_program
+
+mod_sw:
+  name: MOD
+  view: yes
+  icon: mdi:maxcdn
+  entities:
+    - switch.mod_power
+    - switch.mod_key_ok
+    - switch.mod_key_1
+    - switch.mod_key_2
+    - switch.mod_key_3
+    - switch.mod_key_4
+    - switch.mod_key_5
+    - switch.mod_key_6
+    - switch.mod_key_7
+    - switch.mod_key_8
+    - switch.mod_key_9
+    - switch.mod_key_0
+    - switch.mod_key_asterisk
+    - switch.mod_key_pound
+    - switch.mod_key_main
+    - switch.mod_key_next
+    - switch.mod_key_prev
+    - switch.mod_key_return
+    - switch.mod_key_menu
+    - switch.mod_key_up
+    - switch.mod_key_down
+    - switch.mod_key_left
+    - switch.mod_key_right
+
+aircon_sw:
+  name: AirCon
+  view: yes
+  icon: mdi:air-conditioner
+  entities:
+    - switch.hitachi_aircon_cooling_24C
+    - switch.hitachi_aircon_cooling_25C
+    - switch.hitachi_aircon_cooling_26c
+    - switch.hitachi_aircon_cooling_27c
+    - switch.hitachi_aircon_heating_24c
+    - switch.hitachi_aircon_heating_25c
+    - switch.hitachi_aircon_heating_26c
+    - switch.hitachi_aircon_dehumidify_25c
+    - switch.hitachi_aircon_fan_25c
+    - switch.hitachi_aircon_power_off
+
+bedroom:
+  name: Main Bedroom (hue)
+  icon: mdi:ceiling-light
+  entities:
+    - light.bedroom
+kidroom:
+  name: Kid's Room (hue)
+  icon: mdi:ceiling-light
+  entities:
+    - light.kid_room

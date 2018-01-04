@@ -1,0 +1,8 @@
+# input channel no for CATV or MOD
+channel_no:
+  name: Channel
+  initial: 055
+  min: 001
+  max: 999
+  step: 1
+  mode: box

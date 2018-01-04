@@ -1,0 +1,5 @@
+# for playing music on Google Home in a loop
+loop_play:
+  name: Play music in a loop
+  initial: off
+  icon: mdi:loop

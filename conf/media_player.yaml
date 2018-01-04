@@ -1,0 +1,21 @@
+###############################################################################################################
+# MEDIA_PLAYER:
+###############################################################################################################
+
+# Plex
+# - platform: plex
+#   entity_namespace: plex
+
+###############################################################################################################
+# Google cast
+# Google Home (living room)
+- platform: cast
+  host: !secret media_player_cast_host1
+
+# Chromecast video, connected to TV (living room)
+- platform: cast
+  host: !secret media_player_cast_host2
+
+# musin player daemon => modpidy addon on localhost
+#- platform: mpd
+#  host: !secret media_player_mopidy

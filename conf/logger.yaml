@@ -1,0 +1,22 @@
+############################################################
+#
+# Logger
+#
+############################################################
+
+# Log Severities: notset, debug, info, warn, warning, error, fatal, critical
+
+default: info
+logs:
+  homeassistant.core: warn
+  homeassistant.components.automation: warn
+  homeassistant.components.discovery: warn
+  homeassistant.components.http: error
+  homeassistant.components.media_player: warn
+  homeassistant.components.recorder: warn
+  homeassistant.components.tts: warn
+  homeassistant.components.sensor.command_line: warn
+  homeassistant.components.mqtt: debug
+  homeassistant.components.snips: warn
+  homeassistant.components.intent_script: warn
+  homeassistant.components.shell_command: warn

@@ -1,0 +1,36 @@
+# Intent "CHControl_by_No" for snips
+# slotname: CHAction, ChNo, TVDevice=(catv,mod)
+action:
+  - service: input_select.select_option
+    data_template:
+      entity_id: input_select.channel_device
+      option: >
+        {%- if TVDevice is defined -%}
+          {{ TVDevice }}
+        {%- else -%}
+          {{ states.input_select.channel_device.state }}
+        {%- endif -%}
+
+  - service: input_number.set_value
+    data_template:
+      entity_id: input_number.channel_no
+      value: >
+        {%- if ChNo is defined -%}
+          {{ ChNo | int }}
+        {%- else -%}
+          0
+        {%- endif -%}
+
+#  - service: script.turn_on
+#    data:
+#      entity_id: script.input_channel
+
+  - service:  script.turn_on
+    data_template: 
+      entity_id: >
+        {%- if ChNo is defined -%}
+          script.input_channel
+        {%- else -%}
+          script.snips_ch_error_response
+        {%- endif -%}
+

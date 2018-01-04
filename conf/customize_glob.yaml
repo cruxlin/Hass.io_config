@@ -1,0 +1,26 @@
+"switch.main_led_*":
+  icon: mdi:lightbulb
+  assumed_state: false
+
+"switch.*_lamp_switch":
+  icon: mdi:lightbulb
+
+"switch.sony_*":
+  icon: mdi:checkbox-multiple-blank-circle
+  assumed_state: false
+
+"switch.mod_*":
+  icon: mdi:checkbox-multiple-blank-circle
+  assumed_state: false
+
+"switch.cable_*":
+  icon: mdi:checkbox-multiple-blank-circle
+  assumed_state: false
+
+"switch.chromecast_*":
+  icon: mdi:checkbox-multiple-blank-circle
+  assumed_state: false
+
+"switch.hitachi_*":
+  icon: mdi:checkbox-multiple-blank-circle
+  assumed_state: false

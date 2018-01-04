@@ -1,0 +1,24 @@
+# Intent "LightingMode" for snips (Regassio_Chapie)
+action:
+#  - service: mqtt.publish
+#    data_template:
+#      topic: "hermes/dialogueManager/startSession"
+#      payload_template: >
+#        {"siteId":"default","init":{"type":"notification","text":" {{ ["Okay","Sure","Got it","No problem" ] | random }} Switch to {{ LightingMode }} "}}
+#
+  - service_template: >
+      {%- if (LightingMode == "max" and Object == "table lamp") or (LightingMode == "night mode") -%}
+        script.turn_on
+      {%- else -%}
+        switch.turn_on
+      {%- endif -%}
+    data_template:
+      entity_id: >
+        {%- if LightingMode == "night mode" -%}
+          script.night_mode
+        {%- elif LightingMode == "max" and Object == "table lamp" -%}
+          script.table_lamp_full_on
+        {%- else -%}
+          switch.main_led_{{ LightingMode | replace(' ', '_') }}
+        {%- endif -%}
+

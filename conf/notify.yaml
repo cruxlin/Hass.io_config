@@ -1,0 +1,7 @@
+##################################
+# store notification of caller number into a file
+- name: call_log
+  platform: file
+  filename: call_log.txt
+
+
