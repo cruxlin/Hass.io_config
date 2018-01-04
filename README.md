@@ -26,7 +26,9 @@ Configuration files for controlling home devices control with Hass.io on Raspber
 
 ## Connection diagram:
 
-C1 --WiFi-- N1 --WiFi--> C2(or C3) --> H1 ~ H7
+C1 --WiFi-- N1 
+
+            |--WiFi--> C2(or C3) --> H1 ~ H7
 
             |--WiFi--> H9 ~ H11
             
@@ -34,7 +36,7 @@ C1 --WiFi-- N1 --WiFi--> C2(or C3) --> H1 ~ H7
 
 C1 --USB--> H12 (phone line)  and H13
 
-# Main features:
+## Main features:
 
 1. Voice control home devices via
    - M1. Google Home (voice input) -> IFTTT (pre-define voice commands) -> REST API
@@ -56,7 +58,7 @@ C1 --USB--> H12 (phone line)  and H13
 
 5. Play songs of remote media server to Google Home randomly (activated by M1 voice control method)
 
-ToDo...
+## ToDo ...
 
 
 
