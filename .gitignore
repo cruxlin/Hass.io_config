@@ -1,6 +1,7 @@
 *
 !*.yaml
-!/config/conf
-!/config/custom_components
+!conf/**/*.yaml
+!conf/**/*.sh
+!custom_components/**/*.py
 !.gitignore
 secrets.yaml
