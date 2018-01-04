@@ -1,7 +1,7 @@
 # Hass.io_config
 Configuration files for controlling home devices control with Hass.io on Raspberry Pi 3 Model B
 
-Home Devices:
+## Home Devices:
 - H1. Sony TV - IR remote
 - H2. Set-box (for Taiwan cable TV - TBC) - IR remote
 - H3. Set-box (for Taiwan CHT MOD) - IR remote
@@ -16,27 +16,25 @@ Home Devices:
 - H12. USB modem (USR5637 for caller id) - USB 
 - H13. Speakerphone (Jabra 510) - USB
 
-Control devices:
+## Control devices:
 - C1. Raspberry Pi 3 Model B (Hass.io hosted)
 - C2. Broadlin RM Pro - IR/RF controller
 - C3. Logitech Harmony - IR controller
 
-Network devices:
+## Network devices:
 - N1. Asus router RT-AC68U (Ethernet and WiFi)
 
-Connection diagram:
+## Connection diagram:
 
-C1 --WiFi-- N1
+C1 --WiFi-- N1 --WiFi--> C2(or C3) --> H1 ~ H7
 
-           |--WiFi--> C2(or C3) --> H1 ~ H7
-
-           |--WiFi--> H9 ~ H11
+            |--WiFi--> H9 ~ H11
             
-           |--Ethernet--> H8
+            |--Ethernet--> H8
 
 C1 --USB--> H12 (phone line)  and H13
 
-Main features:
+# Main features:
 
 1. Voice control home devices via
    - M1. Google Home (voice input) -> IFTTT (pre-define voice commands) -> REST API
