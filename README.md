@@ -1,5 +1,5 @@
 # Hass.io_config
-Configuration files for controlling home devices control with Hass.io on Raspberry Pi 3 Model B
+Home-assistant configuration files for controlling home devices control with Hass.io on Raspberry Pi 3 Model B
 
 ## Home Devices:
 - H1. Sony TV - IR remote
