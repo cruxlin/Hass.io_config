@@ -23,15 +23,16 @@ Configuration files for controlling home devices control with Hass.io on Raspber
 
 ## Network devices:
 - N1. Asus router RT-AC68U (Ethernet and WiFi)
+- N2. Synology NAS (for media contents)
 
 ## Connection diagram:
-
-> C1 --USB--> H12 (phone line)  and H13
->> | --WiFi-- N1 
->>>            |--WiFi--> C2(or C3) --> H1 ~ H7
->>>            |--WiFi--> H9 ~ H11
->>>            |--Ethernet--> H8
-
+<pre>
+ C1--USB-->H12(phone line) and H13
+  |--WiFi--N1--Ethernet--> H8
+            |--WiFi--> H9 ~ H11 & N2
+            |--WiFi--> C2 (or C3 for IR only)--IR--> H1 ~ H6
+                        |--RF--> H7
+</pre>
 ## Main features:
 
 1. Voice control home devices via
